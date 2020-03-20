@@ -1,16 +1,14 @@
 spring:
-  #数据源
-  datasource:
-    url: jdbc:mysql://localhost:3306/fruit?useUnicode=true&amp;characterEncoding=UTF-8
-    username: root
-    password: 123
-    driver-class-name: com.mysql.jdbc.Driver
+  profiles:
+    active: dev
 
 
   #mybatis配置
-  mybatis:
-    typeAliasesPackage: com.fruit.lou.dao.entity
-    mapperLocations: classpath:mapper/*.xml
+mybatis:
+  type-aliases-package: com.fruit.lou.dao.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     #configLocation: classpath:/mybatis-config.xml
 
 

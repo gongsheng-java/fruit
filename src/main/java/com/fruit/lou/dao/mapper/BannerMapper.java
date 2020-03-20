@@ -8,7 +8,11 @@ import org.springframework.stereotype.Repository;
  * @Description TODO
  * @Date 2020-03-01 15:47
  */
+
 @Repository
 public interface BannerMapper {
     BannerEntity getAllBanner();
+
+    BannerEntity selectByPrimaryKey(Integer id);
+
 }

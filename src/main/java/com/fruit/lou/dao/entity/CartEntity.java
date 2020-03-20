@@ -33,20 +33,20 @@ public class CartEntity {
         this.goodsId = goodsId;
     }
 
-    public int getProductAmount() {
-        return productAmount;
-    }
-
-    public void setProductAmount(int productAmount) {
-        this.productAmount = productAmount;
-    }
-
     public int getUserId() {
         return userId;
     }
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getProductAmount() {
+        return productAmount;
+    }
+
+    public void setProductAmount(int productAmount) {
+        this.productAmount = productAmount;
     }
 
     public boolean isSelect() {

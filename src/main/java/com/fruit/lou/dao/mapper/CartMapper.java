@@ -1,6 +1,7 @@
 package com.fruit.lou.dao.mapper;
 
 import com.fruit.lou.dao.entity.CartEntity;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface CartMapper {
 
     List<CartEntity> getCartEntityByUserId(int userId);
 
-    CartEntity getCartEntityByUserIdAndGoodsId(int userId,int goodsId);
+    CartEntity getCartEntityByUserIdAndGoodsId(@Param("userId") int userId, @Param("goodsId") int goodsId);
 
     int updateCartEntity(CartEntity cartEntity);
 

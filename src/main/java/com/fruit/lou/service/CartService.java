@@ -13,7 +13,7 @@ public interface CartService {
 
     List<CartEntity> getCartEntityByUserId(int userId);
 
-    CartEntity getCartEntityByUserIdAndGoodsId(int userId,int goodsId);
+    CartEntity getCartEntityByUserIdAndGoodsId(int userId, int goodsId);
 
     int updateCartEntity(CartEntity cartEntity);
 

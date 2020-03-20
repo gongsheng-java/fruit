@@ -17,7 +17,7 @@ public interface GoodsService {
 
     List<GoodsCategoryEntity> getGoodsCategory();
 
-    Page<GoodsVO> getGoodsByCategoryId(int categoryId,int pageNumber, int pageSize);
+    Page<GoodsVO> getGoodsByCategoryId(int categoryId, int pageNumber, int pageSize);
 
     GoodsEntity getGoodsById(int goodsId);
 }

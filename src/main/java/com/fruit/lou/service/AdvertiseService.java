@@ -9,4 +9,7 @@ import com.fruit.lou.dao.entity.BannerEntity;
  */
 public interface AdvertiseService {
     BannerEntity getAllBannerEntity();
+
+    BannerEntity selectByPrimaryKey(Integer id);
+
 }

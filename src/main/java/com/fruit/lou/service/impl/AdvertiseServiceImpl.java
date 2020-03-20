@@ -20,4 +20,11 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     public BannerEntity getAllBannerEntity() {
         return bannerMapper.getAllBanner();
     }
+
+    @Override
+    public BannerEntity selectByPrimaryKey(Integer id) {
+        return bannerMapper.selectByPrimaryKey(id);
+    }
+
+
 }

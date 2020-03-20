@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fruit.lou.dao.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.fruit.lou.dao.entity.UserInfoEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="openId" property="openid" jdbcType="VARCHAR" />
+    <result column="sessionKey" property="sessionKey" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="avatarUrl" property="avatarUrl" jdbcType="VARCHAR" />
+    <result column="unionId" property="unionId" jdbcType="VARCHAR" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, openId, sessionKey, nickName, gender, city, province, country, avatarUrl, unionId, 
+    uuid, code
+  </sql>
+
+  <!--根据sessionKey查询-->
+  <select id="getBySessionKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from userinfoentity
+    where sessionkey = #{sessionkey,jdbcType=VARCHAR}
+  </select>
+
+  <!--saveUser-->
+  <insert id="saveUser" parameterType="com.fruit.lou.dao.entity.UserInfoEntity" >
+    insert into userinfoentity (id, openId, sessionKey,
+    nickName, gender, city,
+    province, country, avatarUrl,
+    unionId, uuid, code
+    )
+    values (#{id,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{sessionkey,jdbcType=VARCHAR},
+    #{nickname,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+    #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{avatarurl,jdbcType=VARCHAR},
+    #{unionid,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}
+    )
+  </insert>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfoentity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from userinfoentity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.fruit.lou.dao.entity.UserInfoEntity" >
+    insert into userinfoentity (id, openId, sessionKey, 
+      nickName, gender, city, 
+      province, country, avatarUrl, 
+      unionId, uuid, code
+      )
+    values (#{id,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{sessionkey,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{avatarurl,jdbcType=VARCHAR}, 
+      #{unionid,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fruit.lou.dao.entity.UserInfoEntity" >
+    insert into userinfoentity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="openid != null" >
+        openId,
+      </if>
+      <if test="sessionkey != null" >
+        sessionKey,
+      </if>
+      <if test="nickname != null" >
+        nickName,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="avatarurl != null" >
+        avatarUrl,
+      </if>
+      <if test="unionid != null" >
+        unionId,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionkey != null" >
+        #{sessionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarurl != null" >
+        #{avatarurl,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null" >
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.fruit.lou.dao.entity.UserInfoEntity" >
+    update userinfoentity
+    set openId = #{openid,jdbcType=VARCHAR},
+    sessionKey = #{sessionkey,jdbcType=VARCHAR},
+    nickName = #{nickname,jdbcType=VARCHAR},
+    gender = #{gender,jdbcType=VARCHAR},
+    city = #{city,jdbcType=VARCHAR},
+    province = #{province,jdbcType=VARCHAR},
+    country = #{country,jdbcType=VARCHAR},
+    avatarUrl = #{avatarurl,jdbcType=VARCHAR},
+    unionId = #{unionid,jdbcType=VARCHAR},
+    uuid = #{uuid,jdbcType=VARCHAR},
+    code = #{code,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--updateUser-->
+  <update id="updateUser" parameterType="com.fruit.lou.dao.entity.UserInfoEntity" >
+    update userinfoentity
+    <set >
+      <if test="openid != null" >
+        openId = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionkey != null" >
+        sessionKey = #{sessionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarurl != null" >
+        avatarUrl = #{avatarurl,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null" >
+        unionId = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

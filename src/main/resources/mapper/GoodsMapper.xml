@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fruit.lou.dao.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.fruit.lou.dao.entity.GoodsEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="originalPrice" property="originalPrice" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="subTitle" property="subTitle" jdbcType="VARCHAR" />
+    <result column="recommend" property="recommend" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, originalPrice, price, pic, subTitle, recommend, category
+  </sql>
+
+  <!--计算条数-->
+  <select id="getCountRecommendGoods" resultType="java.lang.Integer">
+    select
+    count(*)
+    from goodsentity
+  </select>
+
+  <!--对推荐商品进行分页-->
+  <select id="getRecommendGoods" resultMap="BaseResultMap">
+    select
+    *
+    from goodsentity limit #{pageNumber},#{pageSize}
+  </select>
+
+  <!--根据category计数-->
+  <select id="getCountGoodsByCategoryId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+     count(*)
+    from goodsentity
+    where category = #{categoryId,jdbcType=INTEGER}
+  </select>
+
+  <!--根据category分页-->
+  <select id="getGoodsByCategoryId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    *
+    from goodsentity
+    where category = #{categoryId,jdbcType=INTEGER} limit #{pageNumber},#{pageSize}
+  </select>
+
+  <!--根据Id查询商品-->
+  <select id="getGoodsById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    *
+    from goodsentity
+    where id = #{goodsId,jdbcType=INTEGER}
+  </select>
+
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goodsentity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goodsentity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fruit.lou.dao.entity.GoodsEntity" >
+    insert into goodsentity (id, name, originalPrice, 
+      price, pic, subTitle, 
+      recommend, category)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{originalprice,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, 
+      #{recommend,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fruit.lou.dao.entity.GoodsEntity" >
+    insert into goodsentity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="originalprice != null" >
+        originalPrice,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="subtitle != null" >
+        subTitle,
+      </if>
+      <if test="recommend != null" >
+        recommend,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="originalprice != null" >
+        #{originalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.lou.dao.entity.GoodsEntity" >
+    update goodsentity
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="originalprice != null" >
+        originalPrice = #{originalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        subTitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null" >
+        recommend = #{recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fruit.lou.dao.entity.GoodsEntity" >
+    update goodsentity
+    set name = #{name,jdbcType=VARCHAR},
+      originalPrice = #{originalprice,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      subTitle = #{subtitle,jdbcType=VARCHAR},
+      recommend = #{recommend,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

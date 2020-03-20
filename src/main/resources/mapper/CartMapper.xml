@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fruit.lou.dao.mapper.CartMapper" >
+  <resultMap id="BaseResultMap" type="com.fruit.lou.dao.entity.CartEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="goodsId" property="goodsId" jdbcType="INTEGER" />
+    <result column="userId" property="userId" jdbcType="INTEGER" />
+    <result column="productAmount" property="productAmount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, goodsId, userId, productAmount
+  </sql>
+
+  <!--根据userId和goodsId查询cart-->
+  <select id="getCartEntityByUserIdAndGoodsId" resultMap="BaseResultMap">
+    select *
+    from cartentity
+    where goodsid = #{goodsId,jdbcType=INTEGER} and userid = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <!--update Cart-->
+  <update id="updateCartEntitySelective" parameterType="com.fruit.lou.dao.entity.CartEntity" >
+    update cartentity
+    <set >
+      <if test="goodsId != null" >
+        goodsId = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        userId = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productAmount != null" >
+        productAmount = #{productAmount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--save Cart-->
+  <insert id="saveCartEntity" parameterType="com.fruit.lou.dao.entity.CartEntity" >
+    insert into cartentity (id, goodsId, userId,productAmount)
+    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+    #{productAmount,jdbcType=INTEGER})
+  </insert>
+
+  <!--根据useId查询cart-->
+  <select id="getCartEntityByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    *
+    from cartentity
+    where userId = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <!--根据Id查询-->
+  <select id="getCartEntityById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from cartentity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cartentity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.fruit.lou.dao.entity.CartEntity" >
+    insert into cartentity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="goodsid != null" >
+        goodsId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="productamount != null" >
+        productAmount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="productamount != null" >
+        #{productamount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateCartEntity" >
+    update cartentity
+    set goodsId = #{goodsId,jdbcType=INTEGER},
+    userId = #{userId,jdbcType=INTEGER},
+    productAmount = #{productAmount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>
